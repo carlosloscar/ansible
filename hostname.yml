@@ -1,0 +1,11 @@
+---
+- name: Verificar hostname
+  hosts: all
+  become: true
+  tasks:
+    - name: Verificando o hostname
+      shell: hostname
+      register: resultado
+
+    - debug:
+        var: resultado.stdout_lines
