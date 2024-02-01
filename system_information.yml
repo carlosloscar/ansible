@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Get System Information
+      shell: |
+        uname -n && cat /etc/*lease | grep PRETTY_NAME
+        uname -a
+        df -hT
+        pvs
+        vgs
+        lvs
+        uptime
+      register: system_information
+
+    - name: System information
+      debug:
+        var: system_information.stdout_lines
